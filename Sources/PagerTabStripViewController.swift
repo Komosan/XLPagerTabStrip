@@ -216,13 +216,13 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
             let pageOffsetForChild = pageOffsetForChildIndex(index: index)
             if fabs(containerView.contentOffset.x - pageOffsetForChild) < CGRectGetWidth(containerView.bounds) {
                 if let _ = childController.parentViewController {
-                    childController.view.frame = CGRectMake(offsetForChildIndex(index), 0, CGRectGetWidth(view.bounds), CGRectGetHeight(containerView.bounds))
+                    childController.view.frame = CGRectMake(pageOffsetForChild, 0, CGRectGetWidth(containerView.bounds), CGRectGetHeight(containerView.bounds))
                     childController.view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
                 }
                 else {
                     addChildViewController(childController)
                     childController.beginAppearanceTransition(true, animated: false)
-                    childController.view.frame = CGRectMake(offsetForChildIndex(index), 0, CGRectGetWidth(view.bounds), CGRectGetHeight(containerView.bounds))
+                    childController.view.frame = CGRectMake(pageOffsetForChild, 0, CGRectGetWidth(containerView.bounds), CGRectGetHeight(containerView.bounds))
                     childController.view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
                     containerView.addSubview(childController.view)
                     childController.didMoveToParentViewController(self)
